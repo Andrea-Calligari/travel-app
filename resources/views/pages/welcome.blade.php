@@ -9,5 +9,5 @@
 
 @section('content')
 
-
+<a href="{{route('trips.index')}}">Viaggi</a>
 @endsection
