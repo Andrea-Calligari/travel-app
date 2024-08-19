@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Step extends Model
 {
     use HasFactory;
+    protected $fillable = ['title', 'description','location'];
      public function day(){
         return $this->belongsTo(Day::class);
     }

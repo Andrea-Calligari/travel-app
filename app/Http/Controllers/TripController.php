@@ -11,7 +11,7 @@ class TripController extends Controller
      */
     public function index()
     {
-        $trips = Trip::has('days')->get();
+        $trips = Trip::with('days.steps')->get();
 
         return view('trips.index', compact('trips'));
     }
@@ -21,7 +21,7 @@ class TripController extends Controller
      */
     public function create()
     {
-        //
+        return view('trips.create');
     }
 
     /**
@@ -29,15 +29,42 @@ class TripController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validazione
+        $validateData = $request->validate([
+            'title' => 'required|string|max:200',
+            'description' => 'required|string',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'days' => 'required|array',
+            'days.*.date' => 'required|date',
+            'days.*.steps' => 'required|array',
+            'days.*.steps.*.title' => 'required|string|max:255',
+            'days.*.steps.*.description' => 'required|string',
+            'days.*.steps.*.location' => 'required|string',
+
+        ]);
+        //creazione viaggio dopo validazione 
+        $new_trip = Trip::create($validateData);
+
+        //crazione giorni
+        foreach ($validateData['days'] as $dayData) {
+            $day = $new_trip->days()->create(['date' => $dayData['date']]);
+            //creazione tappe
+            foreach ($dayData['steps'] as $stepData) {
+                $day->steps()->create($stepData);
+            }
+        }
+
+        return redirect()->route('trips.show', $new_trip);
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Trip $trip)
     {
-        //
+        return view('trips.show', compact('trip'));
     }
 
     /**

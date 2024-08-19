@@ -55,6 +55,34 @@ class TripSeeder extends Seeder
                 'description' => 'Esplorando l\'arte e la cultura di Firenze',
                 'start_date' => Carbon::create('2024', '10', '01'),
                 'end_date' => Carbon::create('2024', '10', '05'),
+                'days' => [
+                    [
+                        'date' => Carbon::create('2024', '09', '01'),
+                        'steps' => [
+                            [
+                                'title' => 'Visita al Colosseo',
+                                'description' => 'Una visita guidata al famoso Colosseo di Roma.',
+                                'location' => 'Roma, Italia',
+
+                            ],
+                            [
+                                'title' => 'Pranzo a Trastevere',
+                                'description' => 'Un pranzo delizioso nel quartiere di Trastevere.',
+                                'location' => 'Trastevere, Roma, Italia',
+                            ]
+                        ],
+                    ],
+                    [
+                        'date' => Carbon::create('2024', '09', '02'),
+                        'steps' => [
+                            [
+                                'title' => 'Visita ai Musei Vaticani',
+                                'description' => 'Esplorazione dei Musei Vaticani e della Cappella Sistina.',
+                                'location' => 'Città del Vaticano',
+                            ],
+                        ],
+                    ],
+                ]
 
             ],
             [
@@ -62,6 +90,34 @@ class TripSeeder extends Seeder
                 'description' => 'Navigando tra i canali di Venezia',
                 'start_date' => Carbon::create('2024', '11', '01'),
                 'end_date' => Carbon::create('2024', '11', '07'),
+                'days' => [
+                    [
+                        'date' => Carbon::create('2024', '09', '01'),
+                        'steps' => [
+                            [
+                                'title' => 'Visita al Colosseo',
+                                'description' => 'Una visita guidata al famoso Colosseo di Roma.',
+                                'location' => 'Roma, Italia',
+
+                            ],
+                            [
+                                'title' => 'Pranzo a Trastevere',
+                                'description' => 'Un pranzo delizioso nel quartiere di Trastevere.',
+                                'location' => 'Trastevere, Roma, Italia',
+                            ]
+                        ],
+                    ],
+                    [
+                        'date' => Carbon::create('2024', '09', '02'),
+                        'steps' => [
+                            [
+                                'title' => 'Visita ai Musei Vaticani',
+                                'description' => 'Esplorazione dei Musei Vaticani e della Cappella Sistina.',
+                                'location' => 'Città del Vaticano',
+                            ],
+                        ],
+                    ],
+                ]
             ],
         ];
 

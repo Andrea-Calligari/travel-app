@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('pages.welcome');
-});
+    return view('pages.home');
+})->name('home');
 
 Route::resource('trips',TripController::class);
