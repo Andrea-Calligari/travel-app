@@ -35,7 +35,8 @@
                                                 @foreach ($day->steps as $step)
                                                     <p><strong>Titolo della Tappa:</strong> {{ $step->title }}</p>
                                                     <p><strong>Descrizione della Tappa:</strong> {{ $step->description }}</p>
-                                                    <p><strong>Luogo della Tappa:</strong> {{ $step->location }}</p>
+                                                    <p><strong>Latitudine della Tappa:</strong> {{ $step->latitude }}</p>
+                                                    <p><strong>Longitudine della Tappa:</strong> {{ $step->longitude }}</p>
                                                 @endforeach
                                             @endforeach
                                         </div>

@@ -28,13 +28,15 @@ class TripSeeder extends Seeder
                             [
                                 'title' => 'Visita al Colosseo',
                                 'description' => 'Una visita guidata al famoso Colosseo di Roma.',
-                                'location' => 'Roma, Italia',
+                                'latitude' => 41.8919300,
+                                'longitude' => 12.5113300,
 
                             ],
                             [
                                 'title' => 'Pranzo a Trastevere',
                                 'description' => 'Un pranzo delizioso nel quartiere di Trastevere.',
-                                'location' => 'Trastevere, Roma, Italia',
+                                'latitude' => 41.8886,
+                                'longitude' => 12.4663,
                             ]
                         ],
                     ],
@@ -44,7 +46,8 @@ class TripSeeder extends Seeder
                             [
                                 'title' => 'Visita ai Musei Vaticani',
                                 'description' => 'Esplorazione dei Musei Vaticani e della Cappella Sistina.',
-                                'location' => 'Città del Vaticano',
+                                'latitude' => 41.9024,
+                                'longitude' => 12.4533,
                             ],
                         ],
                     ],
@@ -62,13 +65,15 @@ class TripSeeder extends Seeder
                             [
                                 'title' => 'Visita al Colosseo',
                                 'description' => 'Una visita guidata al famoso Colosseo di Roma.',
-                                'location' => 'Roma, Italia',
+                                'latitude' => 41.8919300,
+                                'longitude' => 12.5113300,
 
                             ],
                             [
                                 'title' => 'Pranzo a Trastevere',
                                 'description' => 'Un pranzo delizioso nel quartiere di Trastevere.',
-                                'location' => 'Trastevere, Roma, Italia',
+                                'latitude' => 41.8886,
+                                'longitude' => 12.4663,
                             ]
                         ],
                     ],
@@ -78,7 +83,8 @@ class TripSeeder extends Seeder
                             [
                                 'title' => 'Visita ai Musei Vaticani',
                                 'description' => 'Esplorazione dei Musei Vaticani e della Cappella Sistina.',
-                                'location' => 'Città del Vaticano',
+                                'latitude' => 41.9024,
+                                'longitude' => 12.4533,
                             ],
                         ],
                     ],
@@ -97,13 +103,15 @@ class TripSeeder extends Seeder
                             [
                                 'title' => 'Visita al Colosseo',
                                 'description' => 'Una visita guidata al famoso Colosseo di Roma.',
-                                'location' => 'Roma, Italia',
+                                'latitude' => 41.8919300,
+                                'longitude' => 12.5113300,
 
                             ],
                             [
                                 'title' => 'Pranzo a Trastevere',
                                 'description' => 'Un pranzo delizioso nel quartiere di Trastevere.',
-                                'location' => 'Trastevere, Roma, Italia',
+                                'latitude' => 41.8886,
+                                'longitude' => 12.4663,
                             ]
                         ],
                     ],
@@ -113,7 +121,8 @@ class TripSeeder extends Seeder
                             [
                                 'title' => 'Visita ai Musei Vaticani',
                                 'description' => 'Esplorazione dei Musei Vaticani e della Cappella Sistina.',
-                                'location' => 'Città del Vaticano',
+                                'latitude' => 41.9024,
+                                'longitude' => 12.4533,
                             ],
                         ],
                     ],
@@ -171,7 +180,8 @@ class TripSeeder extends Seeder
                                 'day_id' => $new_day->id,
                                 'title' => $stepData['title'],
                                 'description' => $stepData['description'],
-                                'location' => $stepData['location'],
+                                'latitude' => $stepData['latitude'],
+                                'longitude' => $stepData['longitude'],
                             ]);
                         }
                     }

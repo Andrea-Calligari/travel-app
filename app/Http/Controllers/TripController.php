@@ -30,19 +30,24 @@ class TripController extends Controller
     public function store(Request $request)
     {
         //validazione
-        $validateData = $request->validate([
-            'title' => 'required|string|max:200',
-            'description' => 'required|string',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-            'days' => 'required|array',
-            'days.*.date' => 'required|date',
-            'days.*.steps' => 'required|array',
-            'days.*.steps.*.title' => 'required|string|max:255',
-            'days.*.steps.*.description' => 'required|string',
-            'days.*.steps.*.location' => 'required|string',
+        try {
+            $validateData = $request->validate([
+                'title' => 'required|string|max:200',
+                'description' => 'required|string',
+                'start_date' => 'required|date',
+                'end_date' => 'required|date|after_or_equal:start_date',
+                'days' => 'required|array',
+                'days.*.date' => 'required|date',
+                'days.*.steps' => 'required|array',
+                'days.*.steps.*.title' => 'required|string|max:255',
+                'days.*.steps.*.description' => 'required|string',
+                'days.*.steps.*.latitude' => 'required|numeric',
+                'days.*.steps.*.longitude' => 'required|numeric',
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors())->withInput();
+        }
 
-        ]);
         //creazione viaggio dopo validazione 
         $new_trip = Trip::create($validateData);
 
