@@ -11,7 +11,7 @@
                 <div class="col-4 p-3">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">{{$trip->title}}</h5>
+                            <h5 class="card-title text-center"><a href="{{route('trips.show',$trip)}}">{{$trip->title}}</a></h5>
                             <p class="card-text"><strong>Inizio:</strong> {{$trip->start_date}}</p>
                             <p class="card-text"><strong>Fine:</strong> {{$trip->end_date}}</p>
                             <p class="card-text">{{$trip->description}}</p>
@@ -44,6 +44,7 @@
                                 </div>
                             </div>
                         @endif
+                        <button class="btn btn-outline-warning" type="button"><a href="{{route('trips.edit', $trip)}}">Modifica</a></button>
                     </div>
                 </div>
             @endforeach

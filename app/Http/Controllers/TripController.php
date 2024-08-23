@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Trip;
 use Illuminate\Http\Request;
+// use ValidationException;
 
 class TripController extends Controller
 {
@@ -38,12 +39,13 @@ class TripController extends Controller
                 'end_date' => 'required|date|after_or_equal:start_date',
                 'days' => 'required|array',
                 'days.*.date' => 'required|date',
-                'days.*.steps' => 'required|array',
-                'days.*.steps.*.title' => 'required|string|max:255',
-                'days.*.steps.*.description' => 'required|string',
-                'days.*.steps.*.latitude' => 'required|numeric',
-                'days.*.steps.*.longitude' => 'required|numeric',
+                'days.*.steps' => 'nullable|array',
+                'days.*.steps.*.title' => 'required_with:days.*.steps|string|max:255',
+                'days.*.steps.*.description' => 'required_with:days.*.steps|string',
+                'days.*.steps.*.latitude' => 'required_with:days.*.steps|numeric',
+                'days.*.steps.*.longitude' => 'required_with:days.*.steps|numeric',
             ]);
+
         } catch (\Illuminate\Validation\ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
         }
@@ -75,24 +77,64 @@ class TripController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Trip $trip)
     {
-        //
+        $trip->load('days.steps');
+        return view('trips.edit', compact('trip'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Trip $trip)
     {
-        //
+        // dd($request->all());
+        $validateData = $request->validate([
+            'title' => 'required|string|max:200',
+            'description' => 'required|string',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'days' => 'required|array',
+            'days.*.date' => 'required|date',
+            'days.*.steps' => 'nullable|array',
+            'days.*.steps.*.title' => 'required_with:days.*.steps|string|max:255',
+            'days.*.steps.*.description' => 'required_with:days.*.steps|string',
+            'days.*.steps.*.latitude' => 'required_with:days.*.steps|numeric',
+            'days.*.steps.*.longitude' => 'required_with:days.*.steps|numeric',
+        ]);
+
+        $trip->update($validateData);
+
+        foreach ($validateData['days'] as $dayData) {
+            $day = $trip->days()->updateOrCreate(
+                ['id' => $dayData['id'] ?? null],
+                ['date' => $dayData['date']]
+            );
+
+            if (isset($dayData['steps'])) {
+                foreach ($dayData['steps'] as $stepData) {
+                    $day->steps()->updateOrCreate(
+                        ['id' => $stepData['id'] ?? null],
+                        [
+                            'title' => $stepData['title'],
+                            'description' => $stepData['description'],
+                            'latitude' => $stepData['latitude'],
+                            'longitude' => $stepData['longitude']
+                        ]
+                    );
+                }
+            }
+        }
+
+        return redirect()->route('trips.show', $trip);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Trip $trip)
     {
-        //
+        $trip->delete();
+        return redirect()->route('trips.index');
     }
 }

@@ -1,6 +1,6 @@
-@extends('layout.app');
+@extends('layout.app')
 
-@section('title', 'Crea un nuovo viaggio');
+@section('title', 'Crea un nuovo viaggio')
 
 
 
@@ -87,18 +87,18 @@
 @endsection
 
 <script>
-  document.addEventListener('DOMContentLoaded', (event) => {
-    console.log('Script caricato correttamente');
-    let dayIndex = 1;
-    let stepIndex = 1;
+    document.addEventListener('DOMContentLoaded', (event) => {
+        console.log('Script caricato correttamente');
+        let dayIndex = 1;
+        let stepIndex = 1;
 
-    window.aggiungiGiorno = function() {
-        dayIndex++;
-        stepIndex = 1;
-        const daysContainer = document.getElementById('days-container');
-        const newDay = document.createElement('div');
-        newDay.classList.add('day');
-        newDay.innerHTML = `
+        window.aggiungiGiorno = function () {
+            dayIndex++;
+            stepIndex = 1;
+            const daysContainer = document.getElementById('days-container');
+            const newDay = document.createElement('div');
+            newDay.classList.add('day', 'form-group');
+            newDay.innerHTML = `
             <label for="day-${dayIndex}-date">Data del Giorno ${dayIndex}:</label>
             <input class="form-control" type="date" id="day-${dayIndex}-date" name="days[${dayIndex - 1}][date]" required>
             @error('days.${dayIndex - 1}.date')
@@ -122,63 +122,64 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                     <label for="day-${dayIndex}-step-1-longitude">Longitudine:</label>
-                    <input class="form-control" type="text" id="day-${dayIndex}-step-1-longitudine" name="days[${dayIndex - 1}][steps][0][longitude]" required>
+                    <input class="form-control" type="text" id="day-${dayIndex}-step-1-longitude" name="days[${dayIndex - 1}][steps][0][longitude]" required>
                     @error('days.${dayIndex - 1}.steps.0.longitude')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
-            <button type="button" class="btn btn-primary mt-3" onclick="aggiungiTappa(${dayIndex})">Aggiungi Tappa</button>
+            <button type="button" class="btn btn-primary mt-3" onclick="aggiungiTappa(this)">Aggiungi Tappa</button>
         `;
-        daysContainer.appendChild(newDay);
-    }
-
-
-   
-    window.aggiungiTappa = function(button) {
-        const dayDiv = button.closest('.form-group');
-        console.log("dayDiv:", dayDiv); // Debug: verifica che dayDiv sia trovato
-
-        let stepsContainer = dayDiv.querySelector('.steps-container');
-        console.log("stepsContainer:", stepsContainer); // Debug: verifica che stepsContainer sia trovato
-
-        // Se stepsContainer non esiste, crealo
-        if (!stepsContainer) {
-            stepsContainer = document.createElement('div');
-            stepsContainer.classList.add('form-group', 'text-start', 'mb-3', 'steps-container');
-            dayDiv.appendChild(stepsContainer);
-            console.log("stepsContainer creato:", stepsContainer); // Debug: verifica che stepsContainer sia stato creato
+            daysContainer.appendChild(newDay);
         }
 
-        stepIndex++;
-        const newStep = document.createElement('div');
-        newStep.classList.add('step');
-        newStep.innerHTML = `
-            <label for="day-1-step-${stepIndex}-title">Titolo della Tappa ${stepIndex}:</label>
-            <input class="form-control" type="text" id="day-1-step-${stepIndex}-title" name="days[0][steps][${stepIndex - 1}][title]" required>
-            @error('days.0.steps.${stepIndex - 1}.title')
+        window.aggiungiTappa = function (button) {
+            const dayDiv = button.closest('.day');
+            console.log("dayDiv:", dayDiv); // Debug: verifica che dayDiv sia trovato
+
+            let stepsContainer = dayDiv.querySelector('.steps-container');
+            console.log("stepsContainer:", stepsContainer); // Debug: verifica che stepsContainer sia trovato
+
+            if (!stepsContainer) {
+                stepsContainer = document.createElement('div');
+                stepsContainer.classList.add('form-group', 'text-start', 'mb-3', 'steps-container');
+                dayDiv.appendChild(stepsContainer);
+                console.log("stepsContainer creato:", stepsContainer); // Debug: verifica che stepsContainer sia stato creato
+            }
+
+            const dayIndex = Array.from(dayDiv.parentNode.children).indexOf(dayDiv);
+            console.log("dayIndex:", dayIndex); // Debug: verifica che dayIndex sia corretto
+
+            stepIndex++;
+            const newStep = document.createElement('div');
+            newStep.classList.add('step');
+            newStep.innerHTML = `
+            <label for="day-${dayIndex + 1}-step-${stepIndex}-title">Titolo della Tappa ${stepIndex}:</label>
+            <input class="form-control" type="text" id="day-${dayIndex + 1}-step-${stepIndex}-title" name="days[${dayIndex}][steps][${stepIndex - 1}][title]" required>
+            @error('days.${dayIndex}.steps.${stepIndex - 1}.title')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 
-            <label for="day-1-step-${stepIndex}-description">Descrizione:</label>
-            <textarea class="form-control" id="day-1-step-${stepIndex}-description" name="days[0][steps][${stepIndex - 1}][description]" required></textarea>
-            @error('days.0.steps.${stepIndex - 1}.description')
+            <label for="day-${dayIndex + 1}-step-${stepIndex}-description">Descrizione:</label>
+            <textarea class="form-control" id="day-${dayIndex + 1}-step-${stepIndex}-description" name="days[${dayIndex}][steps][${stepIndex - 1}][description]" required></textarea>
+            @error('days.${dayIndex}.steps.${stepIndex - 1}.description')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 
-            <label for="day-1-step-${stepIndex}-latitude">Latitudine:</label>
-            <input class="form-control" type="text" id="day-1-step-${stepIndex}-latitude" name="days[0][steps][${stepIndex - 1}][latitude]" required>
-            @error('days.0.steps.${stepIndex - 1}.latitude')
+            <label for="day-${dayIndex + 1}-step-${stepIndex}-latitude">Latitudine:</label>
+            <input class="form-control" type="text" id="day-${dayIndex + 1}-step-${stepIndex}-latitude" name="days[${dayIndex}][steps][${stepIndex - 1}][latitude]" required>
+            @error('days.${dayIndex}.steps.${stepIndex - 1}.latitude')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 
-            <label for="day-1-step-${stepIndex}-longitude">Longitudine:</label>
-            <input class="form-control" type="text" id="day-1-step-${stepIndex}-longitude" name="days[0][steps][${stepIndex - 1}][longitude]" required>
-            @error('days.0.steps.${stepIndex - 1}.longitude')
+            <label for="day-${dayIndex + 1}-step-${stepIndex}-longitude">Longitudine:</label>
+            <input class="form-control" type="text" id="day-${dayIndex + 1}-step-${stepIndex}-longitude" name="days[${dayIndex}][steps][${stepIndex - 1}][longitude]" required>
+            @error('days.${dayIndex}.steps.${stepIndex - 1}.longitude')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         `;
-        stepsContainer.appendChild(newStep);
-    }});
+            stepsContainer.appendChild(newStep);
+        }
+    });
 
 </script>
