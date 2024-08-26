@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bfe12996eeecb6fdc8713a9fd9d431f8",
+    "content-hash": "c074035187700af9de3014a84b538a86",
     "packages": [
         {
             "name": "brick/math",
@@ -134,6 +134,110 @@
                 }
             ],
             "time": "2023-12-11T17:09:12+00:00"
+        },
+        {
+            "name": "cornford/googlmapper",
+            "version": "v2.8.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bradcornford/Googlmapper.git",
+                "reference": "6371318ed4a3716dfff8aceda98a00aa65b91378"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bradcornford/Googlmapper/zipball/6371318ed4a3716dfff8aceda98a00aa65b91378",
+                "reference": "6371318ed4a3716dfff8aceda98a00aa65b91378",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.1",
+                "phpspec/phpspec": "2.0.*@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Cornford\\Googlmapper": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bradley Cornford",
+                    "email": "me@bradleycornford.co.uk"
+                }
+            ],
+            "description": "An easy way to integrate Google Maps with Laravel.",
+            "keywords": [
+                "google",
+                "laravel",
+                "map",
+                "mapping",
+                "maps",
+                "streetview"
+            ],
+            "support": {
+                "issues": "https://github.com/bradcornford/Googlmapper/issues",
+                "source": "https://github.com/bradcornford/Googlmapper/tree/v2.8.2"
+            },
+            "time": "2017-01-17T15:38:26+00:00"
+        },
+        {
+            "name": "davidvandertuijn/laravel-google-maps",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/davidvandertuijn/laravel-google-maps.git",
+                "reference": "d4dca3be559982b2f32ead3c9b22d80f47f3e627"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/davidvandertuijn/laravel-google-maps/zipball/d4dca3be559982b2f32ead3c9b22d80f47f3e627",
+                "reference": "d4dca3be559982b2f32ead3c9b22d80f47f3e627",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Davidvandertuijn\\LaravelGoogleMaps\\MapperServiceProvider"
+                    ],
+                    "aliases": {
+                        "Mapper": "Davidvandertuijn\\LaravelGoogleMaps\\Facades\\MapperFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Davidvandertuijn\\LaravelGoogleMaps\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David van der Tuijn",
+                    "email": "davidvandertuijn@mac.com"
+                }
+            ],
+            "description": "Laravel Google Maps",
+            "homepage": "https://github.com/davidvandertuijn/laravel-google-maps",
+            "support": {
+                "issues": "https://github.com/davidvandertuijn/laravel-google-maps/issues",
+                "source": "https://github.com/davidvandertuijn/laravel-google-maps"
+            },
+            "time": "2024-04-05T13:50:35+00:00"
         },
         {
             "name": "dflydev/dot-access-data",

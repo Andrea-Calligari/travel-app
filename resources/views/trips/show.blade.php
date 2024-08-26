@@ -1,8 +1,8 @@
 @extends('layout.app')
 
-@section('title', 'il tuo Viaggio')
+@section('title', 'Il tuo Viaggio')
 
-@section('content');
+@section('content')
 <section class="py-5">
     <div class="container p-5">
         <div class="d-flex justify-content-center align-items-center">
@@ -29,6 +29,9 @@
                                 @endforeach
                             </div>
                         @endforeach
+
+                        <div id="map" style="height: 500px; width: 100%;"></div>
+
                         <form action="{{ route('trips.destroy', $trip) }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -41,5 +44,40 @@
     </div>
 </section>
 
+<script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.14.0/maps/maps-web.min.js"></script>
+<link rel="stylesheet" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.14.0/maps/maps.css">
+<script>
+    var tripLongitude = parseFloat('{{ $step->longitude }}');
+    var tripLatitude = parseFloat('{{ $step->latitude }}');
+
+    if (isNaN(tripLongitude) || isNaN(tripLatitude)) {
+        console.error('Invalid trip coordinates:', tripLongitude, tripLatitude);
+    } else {
+        var map = tt.map({
+            key: '{{ env('TOMTOM_API_KEY') }}',
+            container: 'map',
+            center: [tripLongitude, tripLatitude],
+            zoom: 10
+        });
+       
+
+        @foreach($trip->days as $day)
+            @foreach($day->steps as $step)
+                console.log('Step coordinates:', '{{ $step->longitude }}', '{{ $step->latitude }}');
+
+                var stepLongitude = parseFloat('{{ $step->longitude }}');
+                var stepLatitude = parseFloat('{{ $step->latitude }}');
+
+                if (!isNaN(stepLongitude) && stepLongitude >= -180 && stepLongitude <= 180 &&
+                    !isNaN(stepLatitude) && stepLatitude >= -90 && stepLatitude <= 90) {
+                    var marker = new tt.Marker()
+                        .setLngLat([stepLongitude, stepLatitude])
+                        .setPopup(new tt.Popup({ offset: 35 }).setText('{{ $step->title }}'))
+                        .addTo(map);
+                }
+            @endforeach
+        @endforeach
+    }
+</script>
 
 @endsection

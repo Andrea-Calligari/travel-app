@@ -69,8 +69,9 @@ class TripController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Trip $trip)
+    public function show($id)
     {
+        $trip = Trip::with('days.steps')->findOrFail($id);
         return view('trips.show', compact('trip'));
     }
 

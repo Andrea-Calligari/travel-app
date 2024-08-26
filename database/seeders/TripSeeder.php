@@ -28,8 +28,8 @@ class TripSeeder extends Seeder
                             [
                                 'title' => 'Visita al Colosseo',
                                 'description' => 'Una visita guidata al famoso Colosseo di Roma.',
-                                'latitude' => 41.8919300,
-                                'longitude' => 12.5113300,
+                                'latitude' => 41.8919,
+                                'longitude' => 12.5113,
 
                             ],
                             [
@@ -65,8 +65,8 @@ class TripSeeder extends Seeder
                             [
                                 'title' => 'Visita al Colosseo',
                                 'description' => 'Una visita guidata al famoso Colosseo di Roma.',
-                                'latitude' => 41.8919300,
-                                'longitude' => 12.5113300,
+                                'latitude' => 41.8919,
+                                'longitude' => 12.5113,
 
                             ],
                             [
@@ -103,8 +103,8 @@ class TripSeeder extends Seeder
                             [
                                 'title' => 'Visita al Colosseo',
                                 'description' => 'Una visita guidata al famoso Colosseo di Roma.',
-                                'latitude' => 41.8919300,
-                                'longitude' => 12.5113300,
+                                'latitude' => 41.8919,
+                                'longitude' => 12.5113,
 
                             ],
                             [

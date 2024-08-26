@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('day_id')->constrained()->onDelete('cascade');
             $table->string('title',200);
             $table->text('description')->nullable();
-            $table->decimal('latitude',10,7)->nullable();
-            $table->decimal('longitude',10,7)->nullable();
+            $table->decimal('latitude', 6,4);
+            $table->decimal('longitude',6,4);
             $table->timestamps();
         });
     }
